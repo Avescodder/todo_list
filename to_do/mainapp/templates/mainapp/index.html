@@ -1,0 +1,78 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block title %}MAINPAGE{% endblock title %}
+{% block content %}
+<script src="{% static 'mainapp/js/task_edit_pop_up.js' %}"></script>
+
+<div class="add-ts-bg">
+    <div class="add-task-popup">
+        <p class="close-button-addts">&#x274c;</p>
+        <div class="add-task-content">
+            <h2>Add Task</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form_add.as_p }}
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+    </div>
+</div>
+<button type="submit" class="add-task">Add task</button>
+
+<div class="container">
+    <form action="" id="filterForm" method="post">
+        {% csrf_token %}
+        {% for status in statuses %}
+        <input type="checkbox" name="status" id="{{ status.id }}" value="{{ status.id }}" {% if status.id in selected_statuses %}checked{% endif %}>
+        <label for="{{ status.id }}">{{ status.name }}</label>
+        {% endfor %}
+        <button type="submit">Filter</button>
+    </form>
+
+    <div class="tasks-list">
+        {% for task in tasks %}
+        <div class="task" id="{{task.id}}" data-task-text="{{ task.text }}">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <p>Status: {{ task.status.name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="pop-up-bg">
+    <div class="pop-up">
+        <div class="pop-up-header">
+            <p class="close-button">&#x274c;</p>
+        </div>
+        <div class="pop-up-content">
+            <h2 class='pop-up-name'>Edit Task</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="edit_task_id" id="id_id_edit" value="">
+                {% for inp in form_edit %}
+                <div>
+                    {% if inp.label == 'Img' %}
+                    <div>
+                        <label for="{{inp.id_for_label}}">{{inp.label}}</label>
+                        {{ inp }}
+
+                        <img src="" alt="" id="preview_img">
+                    </div>
+                    {%else%}
+                    <label for="{{inp.id_for_label}}">{{inp.label}}</label>
+                    {{ inp }}
+                    {% endif %}
+
+                    {{inp.errors}}
+                </div>
+                {% endfor %}
+    
+                
+                <button class="edit-task" type="submit">Edit</button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}

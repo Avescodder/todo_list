@@ -1,0 +1,242 @@
+/* styles.css */
+*{
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-list li {
+    background: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-list li.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.todo-list li button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4CAF50;
+}
+
+.todo-list li button:hover {
+    color: #f44336;
+}
+
+.add-todo {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.add-todo input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.add-todo button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.add-todo button:hover {
+    background-color: #45a049;
+}
+.tasks-list{
+    margin-top: 15px;
+}
+.task{
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+.task:hover{
+    background-color: #e2dfdf;
+    cursor: pointer;
+}
+.pop-up {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    max-width: 90vw;
+    max-height: 90vh;
+    background-color: rgba(255, 255, 255, 0.815);
+    z-index: 100;
+    padding: 10px;
+    overflow-y: auto;
+}
+.pop-up-bg {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000075;
+}
+.pop-up-header {
+    display: flex;
+    justify-content: flex-end;
+}
+.pop-up-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.add-task-popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    max-width: 90vw;
+    max-height: 90vh;
+    background-color: rgba(255, 255, 255, 0.815);
+    z-index: 100;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.add-ts-bg {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000075;
+}
+
+.add-task-content {
+    display: flex;
+    flex-direction: column;
+}
+.edit-task {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.edit-task:hover {
+    background-color: #3e8e41;
+}
+
+.edit-popup {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    max-width: 90vw;
+    max-height: 90vh;
+    background-color: rgba(255, 255, 255, 0.815);
+    z-index: 100;
+    padding: 10px;
+    overflow-y: auto;
+}
+.edit-popup-bg {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000075;
+}
+.edit-popup-header {
+    display: flex;
+    justify-content: flex-end;
+}
+.edit-popup-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.active {
+    display: flex;
+}
+#preview_img{
+    display: flex;
+    width: 30%;
+}
+
+.textfields {
+    resize: both;
+    overflow: auto;
+    width: 100%;
+    min-height: 100px;
+    max-height: 500px;
+}

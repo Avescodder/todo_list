@@ -1,0 +1,14 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+    <h2>Profile</h2>
+    <p>This is your username:</p>
+    {{ username }}
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Посчитать мои задачи</button>
+    </form>
+    {% if task_count %}
+        <p>You have {{ task_count }} tasks.</p>
+    {% endif %}
+{% endblock %}

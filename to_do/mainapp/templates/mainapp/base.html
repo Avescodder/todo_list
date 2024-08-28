@@ -1,0 +1,41 @@
+{% load static %}
+{% load cache %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+    {% comment %} <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> {% endcomment %}
+    <script src="{% static 'mainapp/js/jquery3.7.min.js' %}"></script>
+    <link rel="stylesheet" a href="{% static 'mainapp/css/css-bootstrap/bootstrap.css' %}"/>
+    <script src="{% static 'mainapp/js/js-bootstrap/bootstrap.js' %}"></script>
+    <!-- Link to CSS files, Bootstrap, or other libraries -->
+</head>
+<body>
+    {% cache 500 header %}
+    <header>
+        <!-- Navigation bar, logo, etc. -->
+        <nav>
+            <a href="{% url 'mainapp:index' %}">Home</a>
+            <a href="{% url 'users:login' %}">Login</a>
+            <a href="{% url 'users:register' %}">Register</a>
+            <a href="{% url 'users:logout' %}">Logout</a>
+            <a href="{% url 'users:profile' %}">Profile</a>
+            <!-- Add more links as needed -->
+        </nav>
+    </header>
+    {% endcache %}
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        <p>© 2023 My Site</p>
+    </footer>
+</body>
+</html>
