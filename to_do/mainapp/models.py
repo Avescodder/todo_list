@@ -22,7 +22,7 @@ class Task(models.Model):
     title = models.TextField(default='-', max_length=255)
     text = models.TextField(max_length=500)
     img = models.ImageField(upload_to='task_images/', null=True, blank=True)
-    date_time = models.DateTimeField(blank=True, null=True)
+    date_time = models.DateTimeField(auto_now_add=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):

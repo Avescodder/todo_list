@@ -5,7 +5,7 @@ import datetime
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
-
+from time import gmtime, strftime
 from mainapp.forms import EditTaskForm, TaskForm
 from mainapp.models import Status, Task
 
@@ -26,7 +26,7 @@ class TasksListView(ListView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["date_time"] = datetime.datetime.now()
+        context["date_time"] = strftime("%Y-%m-%d", gmtime())
         context["statuses"] = Status.objects.all()
         context["form_add"] = TaskForm()
         context["form_edit"] = EditTaskForm()

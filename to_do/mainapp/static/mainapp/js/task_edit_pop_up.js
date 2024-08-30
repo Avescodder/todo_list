@@ -69,7 +69,7 @@ function showPopup(event) {
                 $('#id_text_edit').val(data['text']);
                 $('#id_category_edit').val(data['category']);
                 $('#id_status_edit').val(data['status']);
-                $('#preview_img').attr('src', data['img']); 
+                $('#preview_img').attr('src', data['img']);
             }
         })
     }

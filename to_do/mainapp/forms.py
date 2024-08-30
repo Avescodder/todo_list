@@ -16,8 +16,8 @@ class TaskForm(forms.ModelForm):
         fields = ['title', 'text', 'img', 'status', 'category']
 
 class EditTaskForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.Textarea(attrs={'id':'id_title_edit', 'class':'textfields', 'rows':'4', 'cols':'40' }))
-    text = forms.CharField(widget=forms.Textarea(attrs={'id':'id_text_edit', 'class':'textfields', 'rows':'4', 'cols':'40' }))
+    title = forms.CharField(widget=forms.Textarea(attrs={'id':'id_title_edit', 'class':'textfields', 'rows':'3', 'cols':'30' }))
+    text = forms.CharField(widget=forms.Textarea(attrs={'id':'id_text_edit', 'class':'textfields', 'rows':'3', 'cols':'30' }))
     category = forms.ModelChoiceField(queryset=Category.objects.all(), widget=forms.Select(attrs={'id':'id_category_edit'}))
     status = forms.ModelChoiceField(queryset=Status.objects.all(), widget=forms.Select(attrs={'id':'id_status_edit'}))
     img = forms.ImageField(widget=forms.FileInput(attrs={'id':'id_img_edit', 'class':'a'}), required=False)

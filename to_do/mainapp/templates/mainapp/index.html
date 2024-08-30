@@ -8,7 +8,6 @@
     <div class="add-task-popup">
         <p class="close-button-addts">&#x274c;</p>
         <div class="add-task-content">
-            <p>{{ date_time }}</p>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="add-task">
@@ -19,7 +18,7 @@
     </div>
 </div>
 <button type="submit" class="add-task">Add task</button>
-
+{{date_time}}
 <script type="text/javascript">
     function startTime()
     {
