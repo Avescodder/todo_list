@@ -8,9 +8,10 @@
     <div class="add-task-popup">
         <p class="close-button-addts">&#x274c;</p>
         <div class="add-task-content">
-            <h2>Add Task</h2>
+            <p>{{ date_time }}</p>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" name="add-task">
                 {{ form_add.as_p }}
                 <button type="submit">Add Task</button>
             </form>
@@ -18,6 +19,45 @@
     </div>
 </div>
 <button type="submit" class="add-task">Add task</button>
+
+<script type="text/javascript">
+    function startTime()
+    {
+        var today=new Date();
+        var monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        var monthText = monthNames[today.getMonth()];
+        var h=today.getHours();
+        var m=today.getMinutes();
+        var s=today.getSeconds();
+        var date=today.getDate();
+        
+        
+    
+        m=checkTime(m);
+        s=checkTime(s);
+        document.getElementById('txt').innerHTML=monthText+" "+date+"|"+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500);
+    }
+        function checkTime(i)
+    {
+        if (i<10)
+    {
+        i="0" + i;
+    }
+        return i;
+    }
+</script>
+    
+<body onload="startTime()">
+
+<div class="tile-content" id="txt">
+</div>
+
+</body>
+
 
 <div class="container">
     <form action="" id="filterForm" method="post">
@@ -39,7 +79,6 @@
         {% endfor %}
     </div>
 </div>
-
 <div class="pop-up-bg">
     <div class="pop-up">
         <div class="pop-up-header">

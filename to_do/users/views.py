@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from users.forms import RegistartionForm, LoginForm
 from django.contrib.auth import login
 from users.models import MyUser
 from mainapp.models import Task
-from django.views.generic import TemplateView, ListView, DetailView, View
+from django.views.generic import View
 from django.urls import reverse
 from django.contrib.auth import logout
 
