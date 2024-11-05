@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    $("#team-select").on("change",(event)=>{
+        $("#team-select-form").submit()
+    })
 });
 
 function showPopup(event) {

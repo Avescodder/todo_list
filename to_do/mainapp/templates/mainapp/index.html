@@ -3,7 +3,7 @@
 {% block title %}MAINPAGE{% endblock title %}
 {% block content %}
 <script src="{% static 'mainapp/js/task_edit_pop_up.js' %}"></script>
-
+{{title}}
 <div class="add-ts-bg">
     <div class="add-task-popup">
         <p class="close-button-addts">&#x274c;</p>
@@ -17,8 +17,8 @@
         </div>
     </div>
 </div>
+
 <button type="submit" class="add-task">Add task</button>
-{{date_time}}
 <script type="text/javascript">
     function startTime()
     {
@@ -77,6 +77,26 @@
         </div>
         {% endfor %}
     </div>
+
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+
+                <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            {% endif %}
+    
+            <span class="current">
+                {{ page_obj.number }} 
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                
+            {% endif %}
+        </span>
+    </div>
+
 </div>
 <div class="pop-up-bg">
     <div class="pop-up">

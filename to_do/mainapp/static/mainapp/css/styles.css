@@ -240,3 +240,7 @@ footer {
     min-height: 100px;
     max-height: 500px;
 }
+
+.primary-text{
+    color: black;
+}

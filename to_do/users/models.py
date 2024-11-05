@@ -50,6 +50,7 @@ class MyUser(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+    
 
 
 # Create your models here.

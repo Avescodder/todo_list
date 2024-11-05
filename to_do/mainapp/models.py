@@ -12,6 +12,11 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.id}. {self.name}"
     
+
+class Team(models.Model):
+    title = models.TextField(max_length=25)
+    users = models.ManyToManyField(MyUser, related_name="teams")
+    
 class Task(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -22,9 +27,12 @@ class Task(models.Model):
     title = models.TextField(default='-', max_length=255)
     text = models.TextField(max_length=500)
     img = models.ImageField(upload_to='task_images/', null=True, blank=True)
-    date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField(auto_now_add=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, default=None, null=True, blank=True)
+
     def __str__(self):
         return self.title
+
 

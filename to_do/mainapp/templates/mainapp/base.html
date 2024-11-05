@@ -14,20 +14,54 @@
     <!-- Link to CSS files, Bootstrap, or other libraries -->
 </head>
 <body>
-    {% cache 500 header %}
     <header>
         <!-- Navigation bar, logo, etc. -->
+        
         <nav>
             <a href="{% url 'mainapp:index' %}">Home</a>
             <a href="{% url 'users:login' %}">Login</a>
             <a href="{% url 'users:register' %}">Register</a>
             <a href="{% url 'users:logout' %}">Logout</a>
             <a href="{% url 'users:profile' %}">Profile</a>
-            <!-- Add more links as needed -->
+            
+            <div class="team-selection">
+                <label for="team-select">Выберите команду:</label>
+                <form action="" method="post" id="team-select-form">
+                    
+                    {% csrf_token %}
+                    <select id="team-select" name="team">
+                        <option value="0" {% if team_selected == 0 %} selected {% endif %}>Выберите команду</option>
+                        {% for team in user.teams.all %}
+                            <option value="{{ team.id }}" {% if team_selected == team.id %} selected {% endif %}>{{ team.title }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addTeamModal">Создать команду</button>
+            </div>
+
+            
+            
+            
         </nav>
     </header>
-    {% endcache %}
-
+    <div class="modal fade primary-text" id="addTeamModal" tabindex="-1" aria-labelledby="addTeamModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTeamModalLabel">Создать команду</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-team-form" method="POST" action="{% url 'mainapp:add_team' %}">
+                        {% csrf_token %}
+                        {{ team_form.as_p }}
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <main>
         {% block content %}
         {% endblock %}

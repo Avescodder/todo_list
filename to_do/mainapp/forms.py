@@ -1,5 +1,5 @@
 from django import forms
-from mainapp.models import Category, Task, Status
+from mainapp.models import Category, Task, Status, Team
 
 
 class RegistartionForm(forms.Form):
@@ -24,3 +24,11 @@ class EditTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'text', 'img', 'status', 'category']
+
+class TeamForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['title', 'users']
+        widgets = {
+            'users': forms.CheckboxSelectMultiple()
+        }
