@@ -1,0 +1,16 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+    {% if success%}
+    <h2>Email verifyed successfully!</h2>
+    <p>Your email has been verified. You can now login to your account.</p>
+    {%elif not success and expired %}
+    <h2>Email verification expired</h2>
+    <p>The email verification link has expired. Please request a new one.</p>
+    {% elif not success and not expired %}
+    <h2>Email verification failed</h2>
+    <p>An error occurred while verifying your email. Please try again.</p>
+    {% endif %}
+    <a href="{% url 'users:login' %}">Login</a>
+
+{% endblock %}
