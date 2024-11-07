@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True if os.getenv("DEBUG") == "True" else False 
 
 DOMAIN_NAME = os.getenv("DOMAIN_NAME")
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS"), DOMAIN_NAME]
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS"), DOMAIN_NAME, os.getenv("WWW_DOMAIN_NAME")]
 
 
 # Application definition
