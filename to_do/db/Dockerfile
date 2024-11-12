@@ -8,4 +8,4 @@ ENV POSTGRES_PASSWORD=mysecretpassword
 EXPOSE 5432
 
 # Run the PostgreSQL database
-CMD ["postgres"]
+CMD ["psql -U postgres"]

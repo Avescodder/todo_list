@@ -155,12 +155,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.MyUser'
 
 INTERNAL_IPS = [os.getenv("INTERNAL_IPS")]
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+
+if DEBUG:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+        }
     }
-}
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+            'OPTIONS': {
+                'CLIENT_CLASS':'django_redis.client.DefaultClient',
+                'PASSWORD': os.getenv("REDIS_PASSWORD"),
+            }
+        }
+    }
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -181,4 +194,5 @@ SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")

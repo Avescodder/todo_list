@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build:
-      context: ./app
+      context: ./to_do
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
@@ -11,7 +11,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:mysecretpassword@db:5432/postgres
     volumes:
-      - ./app/static:/app/static
+      - ./to_do/static:/mainapp/static
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
   db:
     build:
