@@ -95,7 +95,7 @@ DATABASES = {
         "NAME": "todo_db",
         "USER": "todo_admin",
         "PASSWORD": "todo_password",
-        "HOST": "127.0.0.1",
+        "HOST": os.getenv("DB_HOST"),
         "PORT": "5432",
     }
 
