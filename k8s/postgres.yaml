@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: todo_admin
+        - name: POSTGRES_PASSWORD
+          value: todo_password
+        - name: POSTGRES_DB
+          value: todo_db
+        resources:
+          requests:
+            memory: "256Mi"  # Minimum memory required
+            cpu: "500m"      # Minimum CPU required (500m = 0.5 CPU core)
+          limits:
+            memory: "1Gi"    # Maximum memory allowed
+            cpu: "1"         # Maximum CPU allowed (1 = 1 full core)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: postgres
+  type: ClusterIP

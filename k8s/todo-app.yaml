@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+      - name: todo
+        image: todo_list-todo:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SECRET_KEY
+          value: django-insecure-uu)iin6l^7*9f(a4apz8fk!#wod560c3f@ebym5#cz^w!g#^g_
+        - name: DEBUG
+          value: "False"
+        - name: DOMAIN_NAME
+          value: localhost:8000
+        - name: ALLOWED_HOSTS
+          value: "127.0.0.1"
+        - name: DB_HOST
+          value: postgres
+        - name: REDIS_PASSWORD
+          value: to_do_password
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: todo
+  type: ClusterIP

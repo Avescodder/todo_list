@@ -1,0 +1,81 @@
+version: '3'
+x-enviroment-defaults: &enviroment-defaults
+  SECRET_KEY: django-insecure-uu)iin6l^7*9f(a4apz8fk!#wod560c3f@ebym5#cz^w!g#^g_
+  DEBUG: False
+  DOMAIN_NAME: localhost:8000
+  ALLOWED_HOSTS: 127.0.0.1
+  DB_HOST: "postgres"
+  INTERNAL_IPS : 127.0.0.1
+  REDIS_PASSWORD : to_do_password
+  CELERY_BROKER_URL: redis://redis:6379/0
+  CELERY_RESULT_BACKEND: redis://redis:6379/0
+
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+       POSTGRES_PASSWORD: todo_password
+       POSTGRES_USER: todo_admin
+       POSTGRES_DB: todo_db
+    networks:
+      - todo-network
+    
+  todo:
+    build: ./to_do
+    ports:
+      - "8001:8000"
+    depends_on:
+      - postgres
+    environment:
+      <<: *enviroment-defaults
+    volumes:
+      - static_volume:/app/static
+    networks:
+      - todo-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - todo
+      - postgres
+    volumes:
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/static
+    networks:
+      - todo-network
+  
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+        - todo-network
+    
+  celery:
+    build:
+      context: ./to_do
+    command: celery -A to_do worker -l info
+    volumes:
+      - ./to_do:/app
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      <<: *enviroment-defaults
+    networks:
+      - todo-network
+
+volumes:
+  static_volume:
+
+networks:
+  todo-network:
+    driver: bridge
+
+
