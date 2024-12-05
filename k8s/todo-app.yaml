@@ -16,6 +16,7 @@ spec:
       - name: todo
         image: todo_list-todo:latest
         imagePullPolicy: Never
+        
         ports:
         - containerPort: 8000
         env:
